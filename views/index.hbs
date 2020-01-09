@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Push Notifications Using Node</title>
+</head>
+
+<body>
+   <h1>Push Notifications Using Node</h1>
+   {{!-- <script src="client.js"></script> --}}
+
+   <button onclick="subscribe()">subscribe</button>
+   <script>
+      addEventListener('load', async () => {
+         let sw = await navigator.serviceWorker.register('../worker.js');
+         console.log(sw);
+      });
+      async function subscribe() {
+         console.log('hi');
+         let sw = await navigator.serviceWorker.ready;
+         let push = await sw.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: 'BFn5dSg2c9gpSCJOQMm11mVWJ8MENy89Cb5wHx00tfhASWiEaFnWfcLJ7PSXJCMuEnRGm0iRjyU4u27K1SWVCKM'
+         });
+         console.log(JSON.stringify(push));
+
+      }
+   </script>
+
+
+</body>
+
+</html>
